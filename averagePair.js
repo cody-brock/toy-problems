@@ -1,4 +1,4 @@
-//Use the multiple-pointers approach to take in an array and determine 
+//Use the multiple-pointers approach to take in a sorted array and determine 
 //if there is a pair of numbers that averages to the target average
 
 function averagePair(arr, targetAvg){
