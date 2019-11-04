@@ -14,3 +14,8 @@ function isSubsequence(str1, str2) {
     }
     return false;
 }
+
+console.log(isSubsequence('aba','abacadabra'));
+console.log(isSubsequence('fml','fudge is my life'));
+console.log(isSubsequence('rtz','really hurts'));
+
