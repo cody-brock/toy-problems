@@ -1,5 +1,6 @@
 //Write out the code for insertion sort
 //Insertion sort is good for if you're sorting data that's coming into an already sorted set.
+//... and you just want to sort this one item in, as it makes a single pass.
 //But it's generally not efficient and not common.
 
 function insertionSort(arr) {
