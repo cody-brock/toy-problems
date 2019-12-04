@@ -1,3 +1,10 @@
+//Doubly Linked Lists are basically the same as singly
+ //except they have an extra pointer to previous nodes
+ //better for finding things - can be done in half the time,
+ //easier to navigate
+ //but it does take up more memory because of the extra pointer
+
+
 class Node {
     constructor(val) {
         this.val = val;
