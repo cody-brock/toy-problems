@@ -57,6 +57,22 @@ BinarySearchTree.prototype.contains = function(val) {
     return false;
 }
 
+function breadthFirstSearch(tree) {
+    let q = [];
+    let visited = [];
+
+    q.push(tree.root);
+
+    if(q.length > 0) {
+        let current = q.pop();
+        visited.push(current.val);
+
+        if (current.left) {
+            
+        }
+    }
+}
+
 var tree = new BinarySearchTree();
 tree.insert(10);
 tree.insert(15);
