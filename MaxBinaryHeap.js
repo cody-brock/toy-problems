@@ -1,6 +1,6 @@
 class MaxBinaryHeap {
     constructor() {
-        this.values = [55,39,33,18,27,12,33]
+        this.values = [55,39,33,18,27,12,34]
     }
 }
 
@@ -25,26 +25,59 @@ MaxBinaryHeap.prototype.bubbleUp = function() {
 }
 
 MaxBinaryHeap.prototype.extractMax = function() {
-    let max = this.values[0]
-    let minIdx = this.values.length - 1;
-    let min = this.values[minIdx];
+    const max = this.values[0]
+    const end = this.values.pop();
+    if (this.values.length > 0) {
+        this.values[0] = end;
+        this.sinkDown();
+        return max;
+    }
+}
 
-    this.values[0] = min;
-    this.values[minIdx] = max;
-
-    let returnNum = this.values.pop();
-    console.log("returnNum", returnNum);
+MaxBinaryHeap.prototype.sinkDown = function() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
 
     while (idx < this.values.length) {
-        let 
-    }
+        let leftChildIdx = (idx * 2) + 1;
+        let rightChildIdx = (idx * 2) + 2;
+        let leftChild, rightChild;
+        let swap = null;
 
+        if (leftChildIdx < length) {
+            leftChild = this.values[leftChildIdx];
+            if (leftChild > element) {
+                swap = leftChildIdx;
+            }
+        }
+
+        if (rightChildIdx < length) {
+            rightChild = this.values[rightChildIdx];
+            if(
+                (swap === null && rightChild > element) || 
+                (swap !== null && rightChild > leftChild)
+            ) {
+                swap = rightChildIdx;
+            }
+        }
+        
+        if (swap === null) break;
+        this.values[idx] = this.values[swap]
+        this.values[swap] = element;
+        idx = swap;
+    }
 }
 
 let heap = new MaxBinaryHeap();
 heap.insert(41);
 heap.insert(45);
+// heap.insert(12);
 
+        //         55
+        //    45        33
+        //41     27   12   34
+    // 18  39  
 console.log("before extractMax", heap);
 heap.extractMax();
 console.log("after extractMax", heap);
