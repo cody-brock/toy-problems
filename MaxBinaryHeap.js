@@ -1,3 +1,5 @@
+
+
 class MaxBinaryHeap {
     constructor() {
         this.values = [55,39,33,18,27,12,34]
@@ -61,7 +63,7 @@ MaxBinaryHeap.prototype.sinkDown = function() {
                 swap = rightChildIdx;
             }
         }
-        
+
         if (swap === null) break;
         this.values[idx] = this.values[swap]
         this.values[swap] = element;
