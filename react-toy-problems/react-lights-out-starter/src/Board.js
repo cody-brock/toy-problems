@@ -42,6 +42,7 @@ class Board extends Component {
       hasWon: false,
       board: this.createBoard(),
     }
+    this.flipCellsAround = this.flipCellsAround.bind(this);
 
     // TODO: set initial state
   }
@@ -65,25 +66,45 @@ class Board extends Component {
   /** handle changing a cell: update board & determine if winner */
 
   flipCellsAround(coord) {
-    let {ncols, nrows} = this.props;
+    // console.log("It's connected!")
+    console.log("Coord: ", coord);
+    let {nCols, nRows} = this.props;
     let board = this.state.board;
     let [y, x] = coord.split("-").map(Number);
 
 
     function flipCell(y, x) {
       // if this coord is actually on board, flip it
+      console.log("x: ", x)
+      console.log("y: ", y)
 
-      if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+      if (x >= 0 && x < nCols && y >= 0 && y < nRows) {
+        //Self
         board[y][x] = !board[y][x];
+        //North
+        if (y-1 >= 0) board[y-1][x] = !board[y-1][x];
+        //South
+        if (y+1 < nRows) board[y+1][x] = !board[y+1][x];
+        //East
+        if (x+1 < nCols) board[y][x+1] = !board[y][x+1];
+        //West
+        if (x-1 >= 0) board[y][x-1] = !board[y][x-1];
       }
     }
 
     // TODO: flip this cell and the cells around it
+    flipCell(y, x);
 
     // win when every cell is turned off
     // TODO: determine is the game has been won
+    let numLit = board.flat().filter(bool => bool === true);
+    console.log("numLit: ", numLit)
+    if (numLit.length === 0) {
+      console.log("WINNING CONDITION")
+      this.setState({ hasWon: true })
+    }
 
-    // this.setState({board, hasWon});
+    this.setState({ board: board });
   }
 
 
@@ -96,14 +117,23 @@ class Board extends Component {
     // TODO
     return(
       <div>
+        {this.state.hasWon
+        ? <h1>You Win!</h1>
+        : 
         <table>
           <tbody>
             {
-              this.state.board.map(subArr => {
+              this.state.board.map((subArr, x) => {
                 return <tr>
                   {
-                    subArr.map(c => {
-                      return <Cell />
+                    subArr.map((c, y) => {
+                      let newCoord = `${x}-${y}`;
+                      return <Cell 
+                                key={newCoord}
+                                coord={newCoord}
+                                isLit={c}
+                                flipCellsAround={this.flipCellsAround}
+                              />
                     })
                   }
                 </tr>
@@ -111,6 +141,7 @@ class Board extends Component {
             }
           </tbody>
         </table>
+        }
       </div>
       // make table board
 
