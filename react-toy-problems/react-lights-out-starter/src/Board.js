@@ -52,9 +52,9 @@ class Board extends Component {
   createBoard() {
     let board = [];
     // TODO: create array-of-arrays of true/false values
-    for (let i = 0; i < this.props.nCols; i++) {
+    for (let i = 0; i < this.props.nRows; i++) {
       let newRow = [];
-      for (let j = 0; j < this.props.nRows; j++) {
+      for (let j = 0; j < this.props.nCols; j++) {
         newRow.push(Math.random() < this.props.chanceLightStartsOn);
       }
       board.push(newRow);
