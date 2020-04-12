@@ -10,6 +10,7 @@ class TodoList extends Component {
     }
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
+    this.editTodo = this.editTodo.bind(this);
   }
 
   addTodo(newTodo) {
@@ -23,6 +24,18 @@ class TodoList extends Component {
     this.setState({ todoData: newTodoData });
   }
 
+  editTodo(newText, idToEdit) {
+    let returnData = this.state.todoData;
+    for (let i = 0; i < returnData.length; i++) {
+      // console.log(this.state.todoData[i].id);
+      if (returnData[i].id === idToEdit) {
+        returnData[i].todoText = newText;
+        this.setState({ todoData: returnData });
+        // this.setState({ todoText: newText }); // I think this line is the problem - have to setState for todoData
+      }
+    }
+  }
+
   render() {
     return(
       <div>
@@ -32,6 +45,7 @@ class TodoList extends Component {
             id={c.id}
             key={c.id}
             removeTodo={this.removeTodo}
+            editTodo={this.editTodo}
           /> 
         ))}
         <NewTodoForm addTodo={this.addTodo} />

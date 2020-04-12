@@ -3,19 +3,72 @@ import React, { Component } from 'react';
 class Todo extends Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      isEditing: false,
+      editTodoText: ''
+    }
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
-  handleClick(evt) {
+  // When user clicks delete, removes that one
+  handleDelete(evt) {
     evt.preventDefault();
     this.props.removeTodo(this.props.id);
   }
 
+  // When user clicks 'update' next to todo...
+    // Puts the associated text into editable form
+  handleEdit(evt) {
+    evt.preventDefault();
+    this.setState({ isEditing: true, editTodoText: this.props.todoText });
+  }
+
+  // When user clicks 'update' next to todo...
+  handleUpdate(evt) {
+    evt.preventDefault();
+    this.setState({ isEditing: false });
+    // props here - like delete!
+    this.props.editTodo(this.state.editTodoText, this.props.id);
+  }
+
+  // Handles state in the form
+  handleChange(evt) {
+    evt.preventDefault();
+    this.setState({ [evt.target.name]: evt.target.value });
+  }
+
   render() {
+    let result;
+    if (!this.state.isEditing) {
+      result = (
+        <div>
+          <div>{this.props.todoText}</div>
+          <button onClick={this.handleDelete}>Delete</button>
+          <button onClick={this.handleEdit}>Edit</button>
+        </div>
+      );
+    } else {
+      result = (
+        <form>
+          <label htmlFor='editTodoText'>Edit:</label>
+          <input 
+            name='editTodoText'
+            id='editTodoText'
+            type='text'
+            value={this.state.editTodoText}
+            onChange={this.handleChange}
+          />
+          <button onClick={this.handleUpdate}>Save</button>
+        </form>
+      )
+    }
+
     return(
       <div>
-        <div>{this.props.todoText}</div>
-        <button onClick={this.handleClick}>X</button>
+        {result}
       </div>
     )
   }
