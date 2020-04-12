@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 class NewTodoForm extends Component {
   constructor(props) {
@@ -17,8 +18,10 @@ class NewTodoForm extends Component {
 
   handleClick(evt) {
     evt.preventDefault();
-    console.log('handleClick fired')
-    this.props.addTodo(this.state.todo);
+    let uuid = uuidv4();
+    let newTodo = { todoText: this.state.todo, id: uuid, key: uuid };
+    this.props.addTodo(newTodo);
+    this.setState({ todo: '' });
   }
 
   render() {
@@ -32,7 +35,7 @@ class NewTodoForm extends Component {
           value={this.state.todo}
           onChange={this.handleChange}
         />
-        <button onClick={this.handleClick}>X</button>
+        <button onClick={this.handleClick}>Add Todo!</button>
       </form>
     )
   }
