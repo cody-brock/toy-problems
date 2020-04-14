@@ -19,7 +19,7 @@ class NewTodoForm extends Component {
   handleClick(evt) {
     evt.preventDefault();
     let uuid = uuidv4();
-    let newTodo = { todoText: this.state.todo, id: uuid, key: uuid };
+    let newTodo = { todoText: this.state.todo, id: uuid, key: uuid, completed: false };
     this.props.addTodo(newTodo);
     this.setState({ todo: '' });
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Todo.css'
 
 class Todo extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Todo extends Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   // When user clicks delete, removes that one
@@ -40,12 +42,18 @@ class Todo extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
+  handleToggle(evt) {
+    this.props.toggleCompletion(this.props.id);
+  }
+
   render() {
     let result;
     if (!this.state.isEditing) {
       result = (
         <div>
-          <div>{this.props.todoText}</div>
+          <li className={this.props.completed ? "completed" : ""} onClick={this.handleToggle}>
+            {this.props.todoText}
+          </li>
           <button onClick={this.handleDelete}>Delete</button>
           <button onClick={this.handleEdit}>Edit</button>
         </div>

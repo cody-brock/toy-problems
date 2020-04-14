@@ -6,11 +6,12 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoData: [{ todoText: 'Take out trash', id: 'trashOne', key: 'trashOne' }, { todoText: 'Feed dragon', id: 'dragonOne', key: 'dragonOne' }]
+      todoData: []
     }
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.editTodo = this.editTodo.bind(this);
+    this.toggleCompletion = this.toggleCompletion.bind(this);
   }
 
   addTodo(newTodo) {
@@ -36,6 +37,16 @@ class TodoList extends Component {
     }
   }
 
+  toggleCompletion(id) {
+    const updatedTodos = this.state.todoData.map(todo => {
+      if (todo.id === id) {
+        return {...todo, completed: !todo.completed};
+      }
+      return todo;
+    })
+    this.setState({ todoData: updatedTodos });
+  }
+
   render() {
     return(
       <div>
@@ -44,8 +55,10 @@ class TodoList extends Component {
             todoText={c.todoText}
             id={c.id}
             key={c.id}
+            completed={c.completed}
             removeTodo={this.removeTodo}
             editTodo={this.editTodo}
+            toggleCompletion={this.toggleCompletion}
           /> 
         ))}
         <NewTodoForm addTodo={this.addTodo} />
