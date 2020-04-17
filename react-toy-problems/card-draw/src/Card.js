@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
 class Card extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   render() {
     return(
-      <img src={this.props.imgSrc} />
+      <img src={this.props.image} alt={this.props.name}/>
     )
   }
 }
