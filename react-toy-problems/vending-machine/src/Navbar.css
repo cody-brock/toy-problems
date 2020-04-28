@@ -1,0 +1,11 @@
+.Navbar {
+  background: rgb(139, 202, 253);
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Navbar-active {
+  color: rgb(243, 126, 126);
+}
