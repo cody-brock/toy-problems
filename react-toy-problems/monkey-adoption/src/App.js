@@ -19,7 +19,9 @@ class App extends Component {
     return(
       <div className="App">
         <Navbar monkeys={this.props.monkeys} />
-        <Routes monkeys={this.props.monkeys} />
+        <div className="container">
+          <Routes monkeys={this.props.monkeys} />
+        </div>
       </div>
     )
   };

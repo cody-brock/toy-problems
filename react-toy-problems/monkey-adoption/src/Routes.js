@@ -13,6 +13,7 @@ class Routes extends Component {
       );
       return <MonkeyDetails {...props} monkey={currentMonkey} />;
     }
+    
     return(
       <Switch>
         <Route 

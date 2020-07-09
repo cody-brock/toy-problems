@@ -6,7 +6,6 @@ class MonkeyDetails extends Component {
   render() {
     let { monkey } = this.props;
     return(
-      <div className="container">
         <div className="MonkeyDetails row justify-content-center mt-5">
           <div className="col-11 col-lg-5">
             <div className="MonkeyDetails-card card">
@@ -33,8 +32,6 @@ class MonkeyDetails extends Component {
             </div>
           </div>
         </div>
-      </div>
-
     )
   }
 }
