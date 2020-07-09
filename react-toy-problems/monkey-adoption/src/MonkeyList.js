@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import MonkeyDetails from './MonkeyDetails';
 
 class MonkeyList extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.history.push(`/monkeys/${}`)
+  }
 
   render() {
     return (
       <div>
         <h1>MonkeyList - Click a Monkey</h1>
+
         {this.props.monkeys.map(m =>
-          <MonkeyDetails 
-            key={m.id}
-            name={m.name}
-            age={m.age}
-            toes={m.toes} 
-            funFact={m.funFact}
-            img={m.img}
-          />
+          <div>
+            <img src={m.img} alt={m.name}/>
+            <button onClick={this.handleClick}>
+              <div>{m.name}</div>
+            </button>
+          </div>
         )}
+
       </div>
     )
   }
