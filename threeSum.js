@@ -1,7 +1,7 @@
-/**
- * @param {number[]} nums
- * @return {number[][]}
- */
+// /**
+//  * @param {number[]} nums
+//  * @return {number[][]}
+//  */
 var threeSum = function(nums) {
   let sums = [];
   nums.sort((a, b) => a - b);
