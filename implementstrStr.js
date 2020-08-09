@@ -5,7 +5,7 @@
 //  */
 
 // ===NAIVE SOLUTION===
-var strStr = function(haystack, needle) {
+var strStr1 = function(haystack, needle) {
   if (needle === '') return 0
   for (let i = 0; i < haystack.length; i++) {
       if (haystack[i] === needle[0]) {
@@ -27,12 +27,26 @@ var strStr = function(haystack, needle) {
   return -1;
 }
 
+// ===FASTER SOLUTION===
+var strStr2 = function(haystack, needle) {
+  if (needle === '' || haystack === needle) return 0
+  for (let i = 0; i < haystack.length; i++) {
+      if (haystack[i] === needle[0]) {
+          let temp = haystack.substring(i, i + needle.length)
+          if (temp === needle) {
+              return i
+          }
+      }
+  }
+  return -1;
+}
 
 
-console.log(strStr("hello", "ll"));
+
+console.log(strStr2("hello", "ll"));
 console.log("=============")
-console.log(strStr("aaaaa", "bba"));
+console.log(strStr2("aaaaa", "bba"));
 console.log("=============")
-console.log(strStr("aaa", "aaaa"));
+console.log(strStr2("aaa", "aaaa"));
 console.log("=============")
 
