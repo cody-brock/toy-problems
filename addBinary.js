@@ -42,15 +42,6 @@ var addBinaryNaive = function(a, b) {
   return b.join('')
 }
 
-
-
-var addBinary = function(a, b) {
-  arr = Array(a.length + b.length).fill(0);
-  console.log(arr)
-}
-
-console.log(addBinary('11', '10'));
-
 // console.log(add([0], 0))
 // console.log(add([1,0,1], 2));
 // console.log(add([1,1,0], 2));
@@ -62,4 +53,30 @@ console.log(addBinary('11', '10'));
 // console.log(subtract([1,1,0], 2));
 
 // console.log(addBinary("11", "1"));
+
+
+
+var addBinary = function(a, b) {
+  aIdx = a.length - 1;
+  bIdx = b.length - 1;
+  let sum = 0
+  let carry = 0
+  let arr = []
+  while (aIdx >= 0 || bIdx >= 0) {
+    sum = (parseInt(a[aIdx]) || 0) + (parseInt(b[bIdx]) || 0) + carry;
+    arr.push(sum % 2);
+    carry = sum >= 2 ? 1 : 0
+    aIdx--;
+    bIdx--;
+  }
+  if (carry) arr.push('1');
+  arr.reverse();
+  return arr.join('');
+}
+
+console.log(addBinary('11', '10'));
+console.log(addBinary('110', '11'));
+console.log(addBinary('11', '1001'));
+
+
 
