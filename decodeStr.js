@@ -3,50 +3,23 @@
 //  * @return {string}
 //  */
 var decodeString = function(s) {
-  let arr = [];
-  let left = 0;
-  let right = 0;
-  
-  function helper(start, end) {
-      console.log("****************")
-      console.log(start, end);
-      let num
-      let str
-      let temp = s.slice(start, end+1);
-      console.log("temp: ", temp)
-      // console.log("num, str: ", num, str)
+    
+  while (s.indexOf('[') !== -1) {
       
-      idx = temp.indexOf('[')
+      let left = s.lastIndexOf('[');
+      let right = left + s.substring(left).indexOf(']');
       
-      console.log("start, idx: ", start, start+idx)
-      num = s.slice(start, start+idx);
+      let str = s.substring(left+1, right)
       
-      console.log("idx+1, end: ", start+idx+1, end)
-      str = s.slice(start+idx+1, end);
-      
-      console.log("num, str:", num, str);
-      
-      while (num > 0) {
-          arr.push(str)
-          num--;
+      let num = ""
+      while ((/\d/).test(s[left-1])) {
+          left--;
+          num = s[left] + num
       }
-      console.log(arr);
+      
+      s = s.substring(0, left) + str.repeat(num) + s.substring(right + 1)
   }
   
-  while (left < s.length && right < s.length) {
-      console.log("right: ", right)
-      if (!/\d/.test(s[right])) {
-          arr.push(s[right]);
-          console.log(arr);
-      } else {
-          left = right;
-          while (s[right] !== ']') {
-              right++;
-          }
-          helper(left, right);
-          right++;
-      }
-  }
-  console.log(arr.join(''))
-  return arr.join('');
+  return s;
+  
 }
