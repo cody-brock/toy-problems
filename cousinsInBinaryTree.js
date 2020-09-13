@@ -23,6 +23,7 @@
 //  * @return {boolean}
 //  */
 
+// with recursive helper function
 var isCousins = function(root, x, y) {
   if (!root) return false;
   let res = true;
@@ -51,4 +52,33 @@ var isCousins = function(root, x, y) {
   
   return res;
   
+};
+
+
+// with iterative queue
+var isCousins = function(root, x, y) {
+  if (!root) return false;
+  const queue = [root];
+  
+  while (queue.length) {
+      const len = queue.length;
+      let foundX = false;
+      let foundY = false;
+      
+      for (let i = 0; i < len; i++) {
+          const node = queue.shift();
+          if (node.left && node.right) {
+              if (node.left.val === x && node.right.val === y || node.left.val === y && node.right.val === x) return false;
+          }
+          
+          if (node.val === x) foundX = true;
+          if (node.val === y) foundY = true;
+          
+          if (node.left) queue.push(node.left);
+          if (node.right) queue.push(node.right);
+      
+      }
+      if (foundX && foundY) return true;
+  }
+  return false
 };
