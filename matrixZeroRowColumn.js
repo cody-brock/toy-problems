@@ -54,8 +54,8 @@ const zeroImproved = (matrix) => {
 
 const zeroFinal = (matrix) => {
 
-  let rowArr = new Array(5).fill(false);
-  let colArr = new Array(5).fill(false);
+  let rowArr = new Array(matrix.length).fill(false);
+  let colArr = new Array(matrix[0].length).fill(false);
 
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix.length; col++) {
