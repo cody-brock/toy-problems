@@ -83,10 +83,11 @@ class SinglyLinkedList {
 // TEST
 let list1 = new SinglyLinkedList();
 // console.log(list1);
+list1.push(1);
 list1.push(2);
-list1.push(8);
-list1.push(2);
-list1.push(2);
+list1.push(3);
+list1.push(4);
+list1.push(5);
 // list1.push(2);
 // list1.push(33);
 // list1.push(22);
@@ -148,7 +149,35 @@ const removeDuplicatesRunner = (list) => {
   return list;
 }
 
-console.log("Before: ", list1)
-console.log(removeDuplicatesRunner(list1));
-console.log("After: ", list1)
+// console.log("Before: ", list1)
+// console.log(removeDuplicatesRunner(list1));
+// console.log("After: ", list1)
 
+const findKthToLastElement = (list, k) => {
+  // Handle edge cases
+  if (!list) return undefined;
+  if (k < 0) return undefined;
+
+  // Create two pointers
+  let p1 = list.head;
+  let p2 = list.head;
+
+  // First, move p2 k nodes ahead
+  for (let i = 0; i < k - 1; i++) {
+    if (!p2) return undefined;
+    p2 = p2.next;
+  }
+  if (!p2) return undefined;
+
+  // Then, move p1 and p2 until p2 reaches the end
+  while (p2.next) {
+    p1 = p1.next;
+    p2 = p2.next;
+  }
+
+  return p1;
+
+}
+
+
+console.log(findKthToLastElement(list1, 3));
