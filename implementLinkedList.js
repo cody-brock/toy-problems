@@ -99,7 +99,7 @@ list1.push(2);
 // list1.removeIndex(2);
 // console.log(list1);
 
-removeDuplicates = (list) => {
+removeDuplicatesHashMap = (list) => {
 
   // Handle edge cases
   if (!list) return undefined;
@@ -114,27 +114,41 @@ removeDuplicates = (list) => {
   // Iterate through the linked list
   while (current !== null) {
 
-    // If new, record new val in Map and move on
+    // If new, record new val in Map and move previous up
     if (!map.get(current.val)) {
       map.set(current.val, true);
       previous = current;
     } else {
-      // If duplicate, remove this node and move on
+      // If duplicate, skip this node
       previous.next = current.next
-
     }
     current = current.next;
   }
 
-
-
-
   // Return modified singly linked list
-  
+  return list;
+}
+
+const removeDuplicatesRunner = (list) => {
+  if (!list) return undefined;
+
+  let current = list.head;
+
+  while(current) {
+    let runner = current;
+    while (runner.next) {
+      if (runner.next.val === current.val) {
+        runner.next = runner.next.next;
+      } else {
+        runner = runner.next;
+      }
+    }
+    current = current.next;
+  }
   return list;
 }
 
 console.log("Before: ", list1)
-console.log(removeDuplicates(list1));
+console.log(removeDuplicatesRunner(list1));
 console.log("After: ", list1)
 
