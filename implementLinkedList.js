@@ -21,7 +21,6 @@ class SinglyLinkedList {
     } else {
       this.tail.next = newNode;
       this.tail = newNode;
-      current = this.head;
     }
     this.length++;
     return this;
@@ -81,14 +80,61 @@ class SinglyLinkedList {
 
 }
 
-let list1 = new LinkedList();
-console.log(list1);
-list1.appendToTail(2);
-list1.appendToTail(8);
-list1.appendToTail(3);
-list1.appendToTail(7);
-console.log(list1);
-list1.deleteNode(2);
-console.log(list1);
+// TEST
+let list1 = new SinglyLinkedList();
+// console.log(list1);
+list1.push(2);
+list1.push(8);
+list1.push(2);
+list1.push(2);
+// list1.push(2);
+// list1.push(33);
+// list1.push(22);
+// list1.push(7);
+// list1.push(2);
+// list1.push(33);
+// list1.push(22);
+// list1.push(9);
+// console.log(list1);
+// list1.removeIndex(2);
+// console.log(list1);
 
+removeDuplicates = (list) => {
+
+  // Handle edge cases
+  if (!list) return undefined;
+
+  // Create a map to hold values we've seen
+  let map = new Map();
+
+  // Set up variables
+  let current = list.head;
+  let previous = null;
+
+  // Iterate through the linked list
+  while (current !== null) {
+
+    // If new, record new val in Map and move on
+    if (!map.get(current.val)) {
+      map.set(current.val, true);
+      previous = current;
+    } else {
+      // If duplicate, remove this node and move on
+      previous.next = current.next
+
+    }
+    current = current.next;
+  }
+
+
+
+
+  // Return modified singly linked list
+  
+  return list;
+}
+
+console.log("Before: ", list1)
+console.log(removeDuplicates(list1));
+console.log("After: ", list1)
 
