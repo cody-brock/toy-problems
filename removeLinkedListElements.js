@@ -33,3 +33,24 @@ var removeElements1 = function(head, val) {
   return head;
   
 };
+
+
+var removeElements2 = function(head, val) {
+
+  if (!head) return head;
+  
+  while (head.val === val) {
+      if (head.next) head = head.next;
+      else return null;
+  }
+  
+  let curr = head;
+  
+  while (curr.next) {
+      if (curr.next.val === val) curr.next = curr.next.next;
+      else curr = curr.next
+  }
+  
+  return head;
+  
+};
