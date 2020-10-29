@@ -16,6 +16,10 @@
 //  * @param {ListNode} head
 //  * @return {ListNode}
 //  */
+
+
+
+// Cumbersome, but clear approach. Obvious solution.
 var middleNode = function(head) {
     
   if (!head) return null;
@@ -50,3 +54,27 @@ var findIndex = function(node, idx) {
 
 
 // ====================================
+
+// Using two pointers. This was my second solution.
+var middleNode = function(head) {
+    
+  if (!head) return null;
+  
+  let slow = head;
+  let fast = head;
+  
+  while (fast !== null) {
+      if (fast.next === null) {
+          // odd length
+          return slow;
+      } else if (fast.next.next === null) {
+          // even length
+          return slow.next;
+      } else {
+          // keep moving
+          fast = fast.next.next;
+          slow = slow.next;
+      }
+  }
+  
+};
