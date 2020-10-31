@@ -1,9 +1,10 @@
-// 141. Linked List Cycle
-// Given head, the head of a linked list, determine if the linked list has a cycle in it.
+// 142. Linked List Cycle II
+
+// Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
 
 // There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
 
-// Return true if there is a cycle in the linked list. Otherwise, return false.
+// Notice that you should not modify the linked list.
 
 // Follow up:
 
@@ -20,42 +21,53 @@
 
 // /**
 //  * @param {ListNode} head
-//  * @return {boolean}
+//  * @return {ListNode}
 //  */
-var hasCycle = function(head) {
+
+var detectCycle = function(head) {
     
-  if (!head || head.next === null) return false;
-  
-  let set = new Set();
+  if (!head) return null;
+
   let node = head;
+  let set = new Set();
   
   while (node !== null) {
       if (set.has(node)) {
-          return true;
+          return node;
       } else {
           set.add(node);
           node = node.next;
       }
   }
   
-  return false;
+  return null;
   
 };
 
 // O(1) memory
-var hasCycle = function(head) {
+var detectCycle = function(head) {
     
-  let slow = head;
   let fast = head;
+  let slow = head;
   
   while (fast && fast.next && fast.next.next) {
+      
       slow = slow.next;
       fast = fast.next.next;
+      
       if (slow === fast) {
-          return true;
+          slow = head;
+          
+          while (slow !== fast) {
+              slow = slow.next;
+              fast = fast.next;
+          }
+          
+          return slow;
       }
+      
   }
   
-  return false;
+  return null;
   
 };
