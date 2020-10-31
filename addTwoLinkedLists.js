@@ -11,105 +11,62 @@
  *     this.next = (next===undefined ? null : next)
  * }
  */
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
+// /**
+//  * @param {ListNode} l1
+//  * @param {ListNode} l2
+//  * @return {ListNode}
+//  */
 var addTwoNumbers = function(l1, l2) {
     
-  const reverseList = function(head) {
-      let prev = null;
-      let next = null;
-      while (head) {
-          next = head.next;
-          head.next = prev;
-          prev = head;
-          head = next;
-      }
-      return prev;   
+  return reverseList(addLists(reverseList(l1), reverseList(l2)));
+  
+};
+
+const reverseList = function(head) {
+  let prev = null;
+  let next = null;
+  while (head) {
+      next = head.next;
+      head.next = prev;
+      prev = head;
+      head = next;
   }
-  
-  const findLength = function(head) {
-      let tally = 0;
-      while (head) {
-          tally++;
-          head = head.next;
+
+  return prev;   
+};
+
+const addLists = function(list1, list2) {
+
+  let sumList = new ListNode();
+  let head = sumList;
+  let sum = 0;
+  let carry = 0;
+
+  while (list1 || list2 || sum > 0) {
+
+      if (list1) {
+          sum += list1.val;
+          list1 = list1.next;
       }
-      return tally;
-  }
-  
-  const addLists = function(long, short) {
-      
-      let l = long;
-      let s = short;
-      let carry = 0;
-      
-      while (l) {
-          
-          if (s) {
 
-              let sum = l.val + s.val + carry;
-
-              if (sum >= 10) {
-                  l.val = sum % 10;
-                  carry = 1;
-              } else {
-                  l.val = sum;
-                  carry = false;
-              }
-              
-              if (carry !== false && l.next === null) {
-                  l.next = new ListNode(carry, null);
-                  carry = false;
-              }
-
-              l = l.next;
-              s = s.next;
-              
-          } else {
-              
-              if (carry !== false) {
-                  
-                  let sum = l.val + carry;
-                  
-                  if (l.next !== null) {
-                      if (sum >= 10) {
-                          l.val = sum % 10;
-                          carry = 1;
-                      } else {
-                          l.val = sum;
-                          return long;
-                      }
-
-                  } else if (l.next === null) {
-                      
-                      if (sum >= 10) {
-                          l.val = sum - 10;
-                          let last = Math.floor(sum / 10 % 10);
-                          l.next = new ListNode(last, null);
-                          return long
-                      } else {
-                          l.val = sum;
-                          return long
-                      }
-                  }
-              }
-              l = l.next;
-          } 
-          
+      if (list2) {
+          sum += list2.val;
+          list2 = list2.next;
       }
-      return long;
+
+      if (sum >= 10) {
+          carry = 1;
+          sum = sum - 10;
+      }
+
+      head.next = new ListNode(sum);
+      head = head.next;
+
+      sum = carry;
+      carry = 0;
+
   }
-  
-  let l1Length = findLength(l1);
-  let l2Length = findLength(l2);
-  
-  const longer = l1Length >= l2Length ? l1 : l2;
-  const shorter = l1Length < l2Length ? l1 : l2;
-  
-  let res = addLists(reverseList(longer), reverseList(shorter));
-  
-  return reverseList(res);
-  
+
+  return sumList.next;
+
 };
