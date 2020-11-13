@@ -43,3 +43,34 @@ var maxDepth = function(root) {
   return max;
 
 };
+
+
+// Returning to make a better solution
+
+// First try:
+var findDepth = function(node) {
+    
+    if (node === null) return 0;
+    
+    let left = findDepth(node.left);
+    let right = findDepth(node.right);
+    
+    return left > right ? left + 1 : right + 1;
+    
+}
+
+var maxDepth = function(root) {
+    
+    return findDepth(root);
+    
+};
+
+
+// Second try, simplifying the above:
+var maxDepth = function(root) {
+    
+    if (root === null) return 0;
+    
+    return Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
+    
+};

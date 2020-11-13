@@ -61,3 +61,29 @@ var isBalanced = function(root) {
     return dfs(root) === Infinity ? false : true;
     
 };
+
+
+// Even better solution.  Idea from CTCI
+var checkHeight = function(node) {
+     
+    if (node === null) return 0;
+    
+    let leftHeight = checkHeight(node.left);
+    if (leftHeight === -1) return -1
+    
+    let rightHeight = checkHeight(node.right);
+    if (rightHeight === -1) return -1
+        
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+        return -1
+    } else {
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+    
+}
+
+var isBalanced = function(root) {
+    
+    return checkHeight(root) === -1 ? false : true;
+    
+};
