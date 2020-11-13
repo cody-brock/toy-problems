@@ -11,10 +11,10 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-/**
- * @param {number[]} nums
- * @return {TreeNode}
- */
+// /**
+//  * @param {number[]} nums
+//  * @return {TreeNode}
+//  */
 var sortedArrayToBST = function(nums) {
   if (nums.length === 0) return null
   
@@ -29,5 +29,63 @@ var sortedArrayToBST = function(nums) {
   }
       
   return helper(nums, 0, nums.length-1);
+  
+};
+
+
+// Returning to this problem - here's another solution
+var sortedArrayToBST = function(nums) {
+
+  // base case
+  if (!nums.length) return null;
+  
+  // First, find the middle index of nums
+  const middle = Math.floor(nums.length / 2);
+  
+  // turn the middle index of nums into a new TreeNode
+  let node = new TreeNode(nums[middle]);
+
+  // Define node's left and right, by recursively calling function of arrays sliced from left and right of middle
+  node.left = sortedArrayToBST(nums.slice(0, middle));
+  node.right = sortedArrayToBST(nums.slice(middle+1));        
+
+  // Finally, return our node
+  return node;
+      
+};
+
+
+// ... And another solution
+var sortedArrayToBST = function(nums) {
+  return helper(nums, 0, nums.length-1);
+};
+
+var helper = function(arr, start, end) {
+  
+  if (start > end) return null;
+  
+  let middle = Math.floor((start + end) / 2);
+  let node = new TreeNode(arr[middle]);
+  
+  node.left = helper(arr, start, middle-1);
+  node.right = helper(arr, middle+1, end);
+  
+  return node;
+  
+}
+
+
+// OK, last solution - seems to be the best option
+var sortedArrayToBST = function(nums, start = 0, end = nums.length - 1) {
+    
+  if (start > end) return null;
+  
+  let middle = Math.floor((start + end) / 2);
+  let node = new TreeNode(nums[middle]);
+  
+  node.left = sortedArrayToBST(nums, start, middle-1);
+  node.right = sortedArrayToBST(nums, middle+1, end);
+  
+  return node;
   
 };
