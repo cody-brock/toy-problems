@@ -55,7 +55,7 @@ var sortedArrayToBST = function(nums) {
 };
 
 
-// ... And another solution
+// ... And another solution.  This time, using indexes without slicing the array.  Faster this way.
 var sortedArrayToBST = function(nums) {
   return helper(nums, 0, nums.length-1);
 };
@@ -75,7 +75,7 @@ var helper = function(arr, start, end) {
 }
 
 
-// OK, last solution - seems to be the best option
+// OK, last solution - seems to be the best option.  The same as the one above, but without helper function.
 var sortedArrayToBST = function(nums, start = 0, end = nums.length - 1) {
     
   if (start > end) return null;
