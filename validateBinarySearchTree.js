@@ -40,5 +40,4 @@ var isValidBST = function(root) {
   helper(root, -Infinity, Infinity);
   return flag;
   
-  
 };
