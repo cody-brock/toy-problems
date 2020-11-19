@@ -47,3 +47,9 @@ const lowestCommonAncestor = function(root, p, q) {
   else return helper(root,p,q);
   
 };
+
+
+// =======================================================================================
+// Solution 2: Without using additional data structures
+
+
