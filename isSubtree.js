@@ -70,4 +70,42 @@ const compareTrees = function(T1, T2) {
 }
 
 
+// =======================================================================================
+// Solution 2: using recursion. Much better time and memory.
+var isSubtree = function(t1, t2) {
+    
+  if (t2 === null) return true;  // If t2 is null, then an empty tree will always be a subtree of t1. Return true.
+  
+  return findCommonRoot(t1, t2);
+  
+};
 
+const findCommonRoot = function(r1, r2) {
+  
+  if (r1 === null) return false;  // r1 has been fully searched without match. Return false.
+  
+  // Compare the value of r1's current node to r2's root node.
+  // If we find a match, send them to compareTrees to see if the rest of the trees match.
+  if (r1.val === r2.val) {
+      if (compareTrees(r1, r2)) return true;
+  }
+  
+  // Recursively call function, traversing DFS through r1.
+  return (findCommonRoot(r1.left, r2) || findCommonRoot(r1.right, r2));
+  
+}
+
+const compareTrees = function(r1, r2) {
+  
+  if (r1 === null && r2 === null) return true; // If both are empty, then they have matched correctly. Return true.
+  if (r1 === null || r2 === null) return false; // If one is empty but not the other, return false.
+  
+  // Comparison logic
+  if (r1.val !== r2.val) {
+      return false; // If the values are different at any point, return false.
+  } else {
+      // If they match, then recursively call compareTrees on each tree's branches.
+      return (compareTrees(r1.left, r2.left) && compareTrees(r1.right, r2.right));
+  }
+  
+}
