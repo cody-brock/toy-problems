@@ -4,6 +4,8 @@
 //  * @return {number[][]}
 //  */
 
+// =======================================================================================
+// Solution 1: This works, but definitely underperforms
 var combinationSum2 = function(candidates, target) {
   let set = new Set();
   findCombinations([], arrToMap(candidates, target), target, set);
@@ -49,5 +51,40 @@ const findCombinations = function(arr, map, target, set) {
           }
       }
   }
+  
+}
+
+
+
+// =======================================================================================
+// Solution 2: Much better solution.  Poorly written, but works well.
+var combinationSum2 = function(candidates, target) {
+        
+  let paths = [];
+  findCombinations(0, [], candidates.sort((a,b) => a-b), target, paths)
+  return paths;
+  
+};
+
+
+const findCombinations = function(idx, arr, candidates, target, paths) {
+      
+  if (target < 0) {
+      return;
+  } else if (target === 0) {
+      paths.push(arr);
+      return;
+  } else {
+      
+      for (let i = idx; i < candidates.length; i++) {
+          if (target - candidates[i] >= 0) {
+              findCombinations(i+1, [...arr, candidates[i]], candidates, target - candidates[i], paths);
+          }
+          while (candidates[i] === candidates[i+1]) i++;
+      }
+      
+  }
+  
+  return paths;
   
 }
