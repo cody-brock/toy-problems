@@ -1,3 +1,28 @@
+# Runtime: 92 ms, faster than 81.22% of Python online submissions for Valid Palindrome II.
+# Memory Usage: 14.4 MB, less than 33.69% of Python online submissions for Valid Palindrome II.
+class Solution(object):
+    def validPalindrome_improved(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        
+        l = 0
+        r = len(s)-1
+        
+        while l < r:
+            if s[l] != s[r]:
+                del_l = s[l+1:r+1]
+                del_r = s[l:r]
+                return self._isPalindrome(del_l) or self._isPalindrome(del_r)
+            l += 1
+            r -= 1
+        
+        return True
+
+    def _isPalindrome(self, s):
+        return s == s[::-1]
+
 def validPalindrome_naive(self, s):
     """
     :type s: str
