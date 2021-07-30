@@ -28,5 +28,24 @@ class FirstRecursiveSolution(object):
                     visited.add(s)
                     return helper(s, visited)
             
-            
         return helper(n, set())
+
+# Second solution, this time using a loop.  Similar performance, similar idea.
+class SecondLoopSolution(object):
+    def isHappy(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        
+        mem = set()
+        
+        while n != 1:
+            n = sum(int(digit)**2 for digit in str(n))
+            if n in mem:
+                return False
+            else:
+                mem.add(n)
+        
+        return True
+
