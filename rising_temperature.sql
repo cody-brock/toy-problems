@@ -47,3 +47,12 @@ FROM
     weather AS w ON DATEDIFF(weather.recordDate, w.recordDate) = 1
         AND weather.Temperature > w.Temperature
 
+
+-- Second solution, this time using SUBDATE (hadn't known about it before, def useful)
+SELECT
+    weather.id AS 'Id'
+FROM
+    weather
+        JOIN weather AS w 
+        ON w.RecordDate = SUBDATE(weather.recordDate, 1)
+    WHERE weather.Temperature > w.Temperature
