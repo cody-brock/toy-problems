@@ -45,3 +45,19 @@ class Solution(object):
                     return True
         
         return helper(0)
+
+
+# Optimized solution.  Much better
+class ImprovedSolution(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        
+        target = len(nums) - 1
+        
+        for i in range(len(nums))[::-1]:
+            if nums[i] + i >= target:
+                target = i
+        return target == 0
